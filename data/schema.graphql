@@ -10,5 +10,13 @@ directive @specifiedBy(
 
 type RootQueryType {
   hello: String
+  todo(id: ID): Todo
+  todos: [Todo]
+}
+
+type Todo {
+  id: ID
+  title: String
+  completed: Boolean
 }
 
