@@ -1,23 +1,16 @@
-import graphql from "babel-plugin-relay/macro";
-import { useLazyLoadQuery } from "react-relay/hooks";
-import Todo from "./Todo";
-
-const query = graphql`
-  query Todos_Query {
-    todos {
-      id
-      ...Todo_Query
-    }
-  }
-`;
+import TodoList from "./TodoList";
+import TodoInput from "./TodoInput";
 
 function Todos() {
-  const data = useLazyLoadQuery(query);
   return (
     <div>
-      {data?.todos?.map((todo) => (
-        <Todo todo={todo} />
-      ))}
+      <section className="todoapp">
+        <header className="header">
+          <h1>todos</h1>
+          <TodoInput />
+        </header>
+      </section>
+      <TodoList />
     </div>
   );
 }

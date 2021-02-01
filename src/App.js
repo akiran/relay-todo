@@ -1,3 +1,4 @@
+import "todomvc-app-css/index.css";
 import "./App.css";
 import { RelayEnvironmentProvider } from "react-relay/hooks";
 import { Suspense } from "react";

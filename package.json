@@ -17,6 +17,7 @@
     "react-relay": "^0.0.0-experimental-4c4107dd",
     "react-scripts": "4.0.1",
     "relay-hooks": "^4.0.0",
+    "todomvc-app-css": "^2.3.0",
     "web-vitals": "^0.2.4"
   },
   "devDependencies": {

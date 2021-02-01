@@ -10,6 +10,7 @@ const fragment = graphql`
 `;
 
 function Todo({ todo }) {
+  console.log(todo);
   const data = useFragment(fragment, todo);
   return <div>{data.title}</div>;
 }

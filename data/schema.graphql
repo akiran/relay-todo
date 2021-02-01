@@ -1,5 +1,6 @@
 schema {
   query: RootQueryType
+  mutation: Mutation
 }
 
 # Exposes a URL that specifies the behaviour of this scalar.
@@ -7,6 +8,32 @@ directive @specifiedBy(
   # The URL that specifies the behaviour of this scalar.
   url: String!
 ) on SCALAR
+
+input CreateTodoInput {
+  title: String!
+  completed: Boolean
+  clientMutationId: String
+}
+
+type CreateTodoPayload {
+  todo: Todo
+  clientMutationId: String
+}
+
+input DeleteTodoInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteTodoPayload {
+  deletedTodoId: ID
+  clientMutationId: String
+}
+
+type Mutation {
+  createTodo(input: CreateTodoInput!): CreateTodoPayload
+  deleteTodo(input: DeleteTodoInput!): DeleteTodoPayload
+}
 
 type RootQueryType {
   hello: String
