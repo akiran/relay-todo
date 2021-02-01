@@ -11,6 +11,7 @@
     "express-graphql": "^0.12.0",
     "graphql": "^15.5.0",
     "graphql-relay": "^0.6.0",
+    "nodemon": "^2.0.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
@@ -27,7 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node -r esm server/index.js",
+    "server": "nodemon --watch server --exec 'node -r esm' server/index.js",
     "relay": "relay-compiler",
     "relay-watch": "relay-compiler --watch",
     "update-schema": "gq http://localhost:4000/graphql --introspect > ./data/schema.graphql"
