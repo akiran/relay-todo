@@ -12,7 +12,13 @@ const fragment = graphql`
 function Todo({ todo }) {
   console.log(todo);
   const data = useFragment(fragment, todo);
-  return <div>{data.title}</div>;
+  return (
+    <li>
+      <input className="toggle" type="checkbox"></input>
+      <label>{data.title}</label>
+      <button className="destroy"></button>
+    </li>
+  );
 }
 
 export default Todo;

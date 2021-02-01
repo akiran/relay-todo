@@ -14,11 +14,13 @@ const query = graphql`
 function TodoList() {
   const data = useLazyLoadQuery(query);
   return (
-    <div>
-      {data.todos.map((todo) => (
-        <Todo key={todo.id} todo={todo} />
-      ))}
-    </div>
+    <section className="main">
+      <ul className="todo-list">
+        {data.todos.map((todo) => (
+          <Todo key={todo.id} todo={todo} />
+        ))}
+      </ul>
+    </section>
   );
 }
 
