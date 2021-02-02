@@ -12,7 +12,7 @@ import type { FragmentReference } from "relay-runtime";
 declare export opaque type Todo_Query$ref: FragmentReference;
 declare export opaque type Todo_Query$fragmentType: Todo_Query$ref;
 export type Todo_Query = {|
-  +id: ?string,
+  +id: string,
   +title: ?string,
   +completed: ?boolean,
   +$refType: Todo_Query$ref,

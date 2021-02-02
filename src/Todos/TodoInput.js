@@ -5,8 +5,10 @@ import { useState } from "react";
 const createTodoMutation = graphql`
   mutation TodoInput_Mutation($input: CreateTodoInput!) {
     createTodo(input: $input) {
-      todo {
-        id
+      todoEdge {
+        node {
+          id
+        }
       }
     }
   }

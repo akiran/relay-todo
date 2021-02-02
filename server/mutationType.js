@@ -22,15 +22,17 @@ const createTodoMutation = mutationWithClientMutationId({
       type: GraphQLBoolean,
     },
   },
-  todoEdge: {
-    type: new GraphQLNonNull(GraphQLTodoEdge),
-    resolve: ({ todoId }) => {
-      const todo = getTodo(todoId);
+  outputFields: {
+    todoEdge: {
+      type: new GraphQLNonNull(GraphQLTodoEdge),
+      resolve: ({ todoId }) => {
+        const todo = getTodo(todoId);
 
-      return {
-        cursor: cursorForObjectInConnection([...getTodos()], todo),
-        node: todo,
-      };
+        return {
+          cursor: cursorForObjectInConnection([...getTodos()], todo),
+          node: todo,
+        };
+      },
     },
   },
   mutateAndGetPayload: ({ title, completed }) => {
