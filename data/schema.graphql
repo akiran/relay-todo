@@ -16,7 +16,7 @@ type CreateTodoPayload {
 }
 
 input DeleteTodoInput {
-  id: ID!
+  todoId: ID
   clientMutationId: String
 }
 

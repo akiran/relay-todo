@@ -16,7 +16,7 @@ export default function DeleteTodo({ id }) {
     commit({
       variables: {
         input: {
-          id,
+          todoId: id,
         },
       },
       onCompleted(data) {

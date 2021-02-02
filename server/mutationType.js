@@ -8,6 +8,8 @@ import {
 import {
   mutationWithClientMutationId,
   cursorForObjectInConnection,
+  fromGlobalId,
+  globalIdField,
 } from "graphql-relay";
 import { GraphQLTodoEdge } from "./queryType";
 import { createTodo, deleteTodo, getTodo, getTodos } from "./database";
@@ -46,8 +48,8 @@ const createTodoMutation = mutationWithClientMutationId({
 const deleteTodoMutation = mutationWithClientMutationId({
   name: "DeleteTodo",
   inputFields: {
-    id: {
-      type: new GraphQLNonNull(GraphQLID),
+    todoId: {
+      type: GraphQLID,
     },
   },
   outputFields: {
@@ -55,13 +57,34 @@ const deleteTodoMutation = mutationWithClientMutationId({
       type: GraphQLID,
     },
   },
-  mutateAndGetPayload: ({ id }) => {
+  mutateAndGetPayload: ({ todoId }) => {
+    const { id } = fromGlobalId(todoId);
     const deletedTodoId = deleteTodo({ id });
     return {
       deletedTodoId,
     };
   },
 });
+
+// const toggleTodoMutation = mutationWithClientMutationId({
+//   name: "ToggleTodo",
+//   inputFields: {
+//     id: {
+//       type: new GraphQLNonNull(GraphQLID),
+//     },
+//   },
+//   outputFields: {
+//     toggledTodoId: {
+//       type: GraphQLID,
+//     },
+//   },
+//   mutateAndGetPayload: ({ id }) => {
+//     const deletedTodoId = toggleTodo({ id });
+//     return {
+//       deletedTodoId,
+//     };
+//   },
+// });
 
 const mutationType = new GraphQLObjectType({
   name: "Mutation",
