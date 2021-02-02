@@ -26,6 +26,9 @@ function TodoInput() {
         onCompleted(data) {
           console.log(data, "!!!");
         },
+        updater: (store) => {
+          console.log(store);
+        },
       });
     }
   }

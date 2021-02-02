@@ -5,9 +5,12 @@ import {
   GraphQLBoolean,
   GraphQLID,
 } from "graphql";
-import { mutationWithClientMutationId } from "graphql-relay";
-import { Todo } from "./types";
-import { createTodo, deleteTodo } from "./helpers";
+import {
+  mutationWithClientMutationId,
+  cursorForObjectInConnection,
+} from "graphql-relay";
+import { GraphQLTodoEdge } from "./queryType";
+import { createTodo, deleteTodo, getTodo, getTodos } from "./database";
 
 const createTodoMutation = mutationWithClientMutationId({
   name: "CreateTodo",
@@ -19,15 +22,21 @@ const createTodoMutation = mutationWithClientMutationId({
       type: GraphQLBoolean,
     },
   },
-  outputFields: {
-    todo: {
-      type: Todo,
+  todoEdge: {
+    type: new GraphQLNonNull(GraphQLTodoEdge),
+    resolve: ({ todoId }) => {
+      const todo = getTodo(todoId);
+
+      return {
+        cursor: cursorForObjectInConnection([...getTodos()], todo),
+        node: todo,
+      };
     },
   },
   mutateAndGetPayload: ({ title, completed }) => {
     const newTodo = createTodo({ title, completed });
     return {
-      todo: newTodo,
+      todoId: newTodo.id,
     };
   },
 });
