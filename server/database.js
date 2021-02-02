@@ -31,7 +31,16 @@ export function createTodo({ title, completed }) {
   return newTodo;
 }
 
-export function deleteTodo({ id }) {
+export function deleteTodo(id) {
   todos = todos.filter((todo) => todo.id !== id);
+  return id;
+}
+
+export function toggleTodo(id) {
+  console.log(todos);
+  todos = todos.map((todo) =>
+    todo.id === id ? { ...todo, completed: !todo.completed } : todo
+  );
+  console.log(todos);
   return id;
 }

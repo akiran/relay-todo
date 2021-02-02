@@ -28,6 +28,7 @@ type DeleteTodoPayload {
 type Mutation {
   createTodo(input: CreateTodoInput!): CreateTodoPayload
   deleteTodo(input: DeleteTodoInput!): DeleteTodoPayload
+  toggleTodo(input: ToggleTodoInput!): ToggleTodoPayload
 }
 
 # An object with an ID
@@ -85,5 +86,15 @@ type TodoEdge {
 
   # A cursor for use in pagination
   cursor: String!
+}
+
+input ToggleTodoInput {
+  todoId: ID
+  clientMutationId: String
+}
+
+type ToggleTodoPayload {
+  todo: Todo
+  clientMutationId: String
 }
 

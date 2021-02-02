@@ -13,6 +13,7 @@ const deleteTodoMutation = graphql`
 export default function DeleteTodo({ id }) {
   const [commit, isInFlight] = useMutation(deleteTodoMutation);
   function clickHandler(e) {
+    e.preventDefault();
     commit({
       variables: {
         input: {
