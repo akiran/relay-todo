@@ -1,6 +1,16 @@
+import { v4 } from "uuid";
+
 let todos = [
-  { id: "1", title: "Learn relay", completed: false },
-  { id: "2", title: "Learn nextjs", completed: true },
+  {
+    id: "0d32e280-d76a-478f-8832-c7dcf8561da4",
+    title: "Learn relay",
+    completed: false,
+  },
+  {
+    id: "e1c0b64a-fd1c-4eb8-b71a-87e1485a3ce5",
+    title: "Learn nextjs",
+    completed: true,
+  },
 ];
 
 export function getTodos() {
@@ -13,11 +23,11 @@ export function getTodo(id) {
 
 export function createTodo({ title, completed }) {
   const newTodo = {
-    id: `${todos.length}`,
+    id: v4(),
     title,
     completed: completed || false,
   };
-  todos = todos.concat(newTodo);
+  todos = [newTodo].concat(todos);
   return newTodo;
 }
 

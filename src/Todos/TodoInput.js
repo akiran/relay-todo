@@ -1,6 +1,8 @@
 import { useMutation } from "react-relay/hooks";
 import graphql from "babel-plugin-relay/macro";
 import { useState } from "react";
+import { ConnectionHandler } from "relay-runtime";
+import uuid from "uuid";
 
 const createTodoMutation = graphql`
   mutation TodoInput_Mutation($input: CreateTodoInput!) {
@@ -8,6 +10,8 @@ const createTodoMutation = graphql`
       todoEdge {
         node {
           id
+          title
+          completed
         }
       }
     }
@@ -30,6 +34,11 @@ function TodoInput() {
         },
         updater: (store) => {
           console.log(store);
+          const payload = store.getRootField("createTodo");
+          const newEdge = payload.getLinkedRecord("todoEdge");
+          const proxy = store.getRoot();
+          const conn = ConnectionHandler.getConnection(proxy, "TodoList_todos");
+          ConnectionHandler.insertEdgeBefore(conn, newEdge);
         },
       });
     }
